@@ -277,11 +277,13 @@ infect() {
 
   export NIXOS_CONFIG=/etc/nixos/configuration.nix
 
-  nix-env --set \
+  nix-env --option substituters 'https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store https://cache.nixos.org ' \
+    --set \
     -I nixpkgs=$HOME/.nix-defexpr/channels/nixos \
     -f '<nixpkgs/nixos>' \
     -p /nix/var/nix/profiles/system \
     -A system
+
 
   # Remove nix installed with curl | bash
   rm -fv /nix/var/nix/profiles/default*
